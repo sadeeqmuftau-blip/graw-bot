@@ -1,3 +1,5 @@
+const http = require('http');
+http.createServer((req,res)=>{ res.writeHead(200); res.end('GRAW BOT RUNNING'); }).listen(process.env.PORT || 10000);
 /**
  * GRAWDAYTRADER — 24/7 Telegram Flip Alert Bot
  * Works even when you're offline / chart closed
