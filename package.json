@@ -1,0 +1,13 @@
+{
+  "name": "grawdaytrader-telegram-bot",
+  "version": "1.0.0",
+  "description": "GRAWDAYTRADER 24/7 Telegram Flip Alerts",
+  "main": "telegram-flip-bot.js",
+  "scripts": {
+    "start": "node telegram-flip-bot.js"
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "dependencies": {}
+}
