@@ -23,7 +23,7 @@ const GLOBAL_TF = process.env.GLOBAL_TF || '15m'; // change to 1h, 5m, etc
 const TOP_N = parseInt(process.env.TOP_N || '100');
 const POLL_INTERVAL_MS = parseInt(process.env.POLL_INTERVAL_MS || '10000'); // 10s
 
-const FAPI = 'https://fapi.binance.com';
+const FAPI = 'https://api.binance.com';
 const SKIP = /DOWN|UP|BEAR|BULL|_[0-9]/;
 
 let lastZones = {}; // symbol -> zone
@@ -82,7 +82,7 @@ async function sendTelegram(text){
 
 async function checkFlips(){
   console.log(`\n[${new Date().toLocaleTimeString()}] Checking ${TOP_N} coins @ ${GLOBAL_TF}...`);
-  const tickers = await get(FAPI+'/fapi/v1/ticker/24hr');
+  const tickers = await get(FAPI+'/api/v3/ticker/24hr');
   if(!tickers) return;
   const pool = tickers.filter(t=>t.symbol.endsWith('USDT') && !SKIP.test(t.symbol))
                       .sort((a,b)=>parseFloat(b.quoteVolume)-parseFloat(a.quoteVolume))
@@ -95,7 +95,7 @@ async function checkFlips(){
   for(const chunk of chunks){
     await Promise.all(chunk.map(async (t)=>{
       const sym = t.symbol;
-      const klines = await get(FAPI+`/fapi/v1/klines?symbol=${sym}&interval=${GLOBAL_TF}&limit=21`);
+      const klines = await get(FAPI+`/api/v3/klines?symbol=${sym}&interval=${GLOBAL_TF}&limit=21`);
       const live = computeLiveZone(klines);
       if(!live) return;
       
