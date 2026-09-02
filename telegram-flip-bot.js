@@ -23,7 +23,7 @@ const GLOBAL_TF = process.env.GLOBAL_TF || '15m'; // change to 1h, 5m, etc
 const TOP_N = parseInt(process.env.TOP_N || '100');
 const POLL_INTERVAL_MS = parseInt(process.env.POLL_INTERVAL_MS || '10000'); // 10s
 
-const FAPI = 'https://api.binance.com';
+const FAPI = 'https://data-api.binance.vision';
 const SKIP = /DOWN|UP|BEAR|BULL|_[0-9]/;
 
 let lastZones = {}; // symbol -> zone
